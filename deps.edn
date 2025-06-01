@@ -5,4 +5,7 @@
         no.cjohansen/replicant {:mvn/version "2025.03.27"}}
  :aliases
  {:dev
-  {:extra-paths ["dev"]}}}
+  {:extra-paths ["dev"]}
+  :build
+  {:deps {io.github.clojure/tools.build {:git/tag "v0.10.7" :git/sha "573711e"}}
+   :ns-default build}}}

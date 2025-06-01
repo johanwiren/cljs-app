@@ -1,0 +1,18 @@
+{:tasks
+ {:init (do
+          (def container-settings
+            {:memory-limit 256
+             :cpu-limit 250
+             :min-scale 0
+             :max-scale 1})
+          (def namespace-id "866d99be-f5d0-435b-b891-9e92776c8786")
+          #_(def container-id "83f41731-217c-4c04-8680-cd7be582a5b3"))
+
+  deploy (shell (format "scw container deploy namespace-id=%s" namespace-id))
+
+  dev {:task (shell "npx shadow-cljs watch app")}
+
+  clean {:task (shell "rm -rf public/js")}
+
+  release {:task (shell "clj -M -m shadow.cljs.devtools.cli release frontend")
+           :depends [clean]}}}
