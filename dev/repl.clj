@@ -7,11 +7,10 @@
 
 (defn start
   []
-
   (reset! jetty-ref
-    (jetty/run-jetty #'server/handler
-      {:port 8020
-       :join? false}))
+          (jetty/run-jetty (server/handler {:static-handler :file})
+                           {:port 8020
+                            :join? false}))
   ::started)
 
 (defn stop []
