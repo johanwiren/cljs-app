@@ -1,6 +1,7 @@
 (ns user
   (:require [shadow.cljs.devtools.api :as shadow]
-            [shadow.cljs.devtools.server :as server]))
+            [shadow.cljs.devtools.server :as server]
+            [repl]))
 
 (defn cljs-repl
   ([]
@@ -8,4 +9,6 @@
   ([build-id]
    (server/start!)
    (shadow/watch build-id)
-   (shadow/nrepl-select build-id)))
+   (shadow/nrepl-select build-id)
+   (repl/go) ;; Start backend
+   ))
