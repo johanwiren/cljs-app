@@ -1,0 +1,9 @@
+{:deps true
+
+ :builds
+ {:frontend {:target :browser
+             :modules {:main {:init-fn cljsapp.frontend.app/init}}
+             :devtools {:watch-dir "public"}}}
+
+ :dev-http {8020 {:root "public"
+                  :proxy "http://localhost:8021"}}}
