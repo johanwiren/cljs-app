@@ -11,9 +11,9 @@ RUN $JAVA_HOME/bin/jlink \
          --output /javaruntime
 
 # Define your base image
-FROM debian:buster-slim AS build
+FROM debian:stable-slim AS build
 ENV JAVA_HOME=/opt/java/openjdk
-ENV PATH "${JAVA_HOME}/bin:${PATH}"
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
 COPY --from=jre-build /javaruntime $JAVA_HOME
 
 # Install clojure
@@ -37,7 +37,9 @@ RUN clojure -M -m shadow.cljs.devtools.cli release frontend
 # Backend with bundled frontend
 RUN clojure -T:build uberjar
 
-FROM debian:buster-slim
+FROM debian:stable-slim
+ENV JAVA_HOME=/opt/java/openjdk
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
 COPY --from=jre-build /javaruntime $JAVA_HOME
 RUN mkdir /opt/app
 COPY --from=build target/scw-docker.jar /opt/app/
