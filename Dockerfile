@@ -3,7 +3,7 @@ FROM eclipse-temurin:21 AS jre-build
 
 # Create a custom Java runtime
 RUN $JAVA_HOME/bin/jlink \
-         --add-modules java.base,java.net.http,java.se,java.compiler \
+         --add-modules java.base,java.net.http,java.se,java.compiler,jdk.crypto.ec \
          --strip-debug \
          --no-man-pages \
          --no-header-files \
